@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div className="App">
+    <div>
       <h1>Gallery Images</h1>
     </div>
   );
