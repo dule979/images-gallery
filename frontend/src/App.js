@@ -19,12 +19,16 @@ function App() {
     )
       .then((response) => response.json())
       .then((data) => {
-        setImages([...images, { ...data, title: searchInput }]);
+        setImages([{ ...data, title: searchInput }, ...images]);
       })
       .catch((err) => {
         console.log(err);
       });
     setSearchInput("");
+  };
+
+  const handleDelete = (id) => {
+    setImages(images.filter((image) => image.id !== id));
   };
 
   return (
@@ -35,11 +39,11 @@ function App() {
         onInput={setSearchInput}
         onHandleInput={handleInput}
       />
-      <Container>
+      <Container className="mt-4">
         <Row xs={1} md={2} lg={3}>
           {images.map((image) => (
-            <Col key={image.id}>
-              <CardComponent image={image} />
+            <Col className="pb-3" key={image.id}>
+              <CardComponent image={image} onDelete={handleDelete} />
             </Col>
           ))}
         </Row>
