@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import CardComponent from "./components/CardComponent";
 import Header from "./components/Header";
 import Search from "./components/Search";
+import Welcome from "./components/Welcome";
 
 const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
@@ -40,13 +41,17 @@ function App() {
         onHandleInput={handleInput}
       />
       <Container className="mt-4">
-        <Row xs={1} md={2} lg={3}>
-          {images.map((image) => (
-            <Col className="pb-3" key={image.id}>
-              <CardComponent image={image} onDelete={handleDelete} />
-            </Col>
-          ))}
-        </Row>
+        {images.length > 0 ? (
+          <Row xs={1} md={2} lg={3}>
+            {images.map((image) => (
+              <Col className="pb-3" key={image.id}>
+                <CardComponent image={image} onDelete={handleDelete} />
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <Welcome />
+        )}
       </Container>
     </div>
   );
